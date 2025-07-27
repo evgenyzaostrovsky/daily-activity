@@ -1,5 +1,5 @@
 import { Card, Grid, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -12,10 +12,10 @@ import { useDispatch } from "react-redux";
 export const AddingCalls = () => {
     const dispatch = useDispatch();
 
-    const [newCall, setNewCall] = useState(false);
-    const [oldCall, setOldCall] = useState(false);
-    const [noteReject, setNoteReject] = useState(false);
-    const [fundOffered, setFundOffered] = useState(false);
+    const [newCall, setNewCall] = useState<boolean>(false);
+    const [oldCall, setOldCall] = useState<boolean>(false);
+    const [noteReject, setNoteReject] = useState<boolean>(false);
+    const [fundOffered, setFundOffered] = useState<boolean>(false);
     const [itIsDeal, setItIsDeal] = useState(false);
 
     const [localNotePipe, setLocalNotePipe] = useState(0);
@@ -33,6 +33,7 @@ export const AddingCalls = () => {
             alert('Выберите тип звонка');
             return;
         }
+
 
         const newCallAdding: Call = {
             id: Date.now().toString(),
@@ -52,6 +53,7 @@ export const AddingCalls = () => {
             }
         };
 
+        // Очистка
         setLocalNotePipe(0);
         setLocalFundPipe(0);
         setLocalInsurancePipe(0);
@@ -69,6 +71,7 @@ export const AddingCalls = () => {
         dispatch(addCall(newCallAdding));
     };
 
+    // Глобальный обработчик Enter с эффектом
     useEffect(() => {
         if (!emptyCallCondition) {
             const handleKeyDown = (e: KeyboardEvent) => {
@@ -79,9 +82,14 @@ export const AddingCalls = () => {
                     handleAddCall();
                 }
             };
+
             window.addEventListener('keydown', handleKeyDown);
-            return () => window.removeEventListener('keydown', handleKeyDown);
+            return () => {
+                window.removeEventListener('keydown', handleKeyDown);
+            };
         }
+        // Если emptyCallCondition === true — эффект не добавляет обработчик
+        // Но useEffect всё равно вызывается, просто ничего не делает
     }, [
         emptyCallCondition,
         newCall,
@@ -97,6 +105,7 @@ export const AddingCalls = () => {
         localInsuranceDeal,
     ]);
 
+    // Стили кнопок
     const buttonDealColor = itIsDeal
         ? { border: "1px solid #e2e8f0", backgroundColor: "#b9fbc0", color: "black" }
         : { color: "#0a0817" };
@@ -164,7 +173,7 @@ export const AddingCalls = () => {
             </Box>
 
             <Grid container spacing={2} sx={{ width: '100%', marginTop: '20px' }}>
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
                         <Typography>Тип звонка</Typography>
                         <Box sx={{ display: "flex", mt: "15px", gap: "5px" }}>
@@ -188,7 +197,7 @@ export const AddingCalls = () => {
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <Box sx={{ display: "flex", flexDirection: "column", padding: "10px", gap: "5px" }}>
                         <Typography sx={{ mb: "10px" }}>Результаты звонка</Typography>
                         <Button variant="outlined" onClick={() => onChangeHandler("NOTE_REJECT")} sx={buttonNoteRejectedStyles}>
@@ -236,42 +245,45 @@ export const AddingCalls = () => {
                 </Box>
             </Box>
 
-            {itIsDeal && (
-                <Box sx={{ width: "100%", padding: "10px" }}>
-                    <Box sx={{ mb: "20px" }}>
-                        <Typography sx={{ mb: "20px" }}>Реализованная сделка</Typography>
-                        <Box sx={{ display: "flex", gap: "10px", width: "100%" }}>
-                            <TextField
-                                type="number"
-                                size="small"
-                                label="ИОБ (рублей)"
-                                value={localNoteDeal}
-                                onChange={(e) => setLocalNoteDeal(+e.currentTarget.value)}
-                                sx={{ flex: 1 }}
-                            />
-                            <TextField
-                                type="number"
-                                size="small"
-                                label="ПИФ (рублей)"
-                                value={localFundDeal}
-                                onChange={(e) => setLocalFundDeal(+e.currentTarget.value)}
-                                sx={{ flex: 1 }}
-                            />
-                            <TextField
-                                type="number"
-                                size="small"
-                                label="ПДС (рублей)"
-                                value={localInsuranceDeal}
-                                onChange={(e) => setLocalInsuranceDeal(+e.currentTarget.value)}
-                                sx={{ flex: 1 }}
-                            />
-                        </Box>
-                    </Box>
-                </Box>
-            )}
 
-            {!emptyCallCondition && (
-                <Button
+
+                    {itIsDeal && (
+
+                            <Box sx={{ width: "100%", padding: "10px" }}>
+                                <Box sx={{ mb: "20px" }}>
+                                    <Typography sx={{ mb: "20px" }}>Реализованная сделка</Typography>
+                                    <Box sx={{ display: "flex", gap: "10px", width: "100%" }}>
+                                        <TextField
+                                            type="number"
+                                            size="small"
+                                            label="ИОБ (рублей)"
+                                            value={localNoteDeal}
+                                            onChange={(e) => setLocalNoteDeal(+e.currentTarget.value)}
+                                            sx={{ flex: 1 }}
+                                        />
+                                        <TextField
+                                            type="number"
+                                            size="small"
+                                            label="ПИФ (рублей)"
+                                            value={localFundDeal}
+                                            onChange={(e) => setLocalFundDeal(+e.currentTarget.value)}
+                                            sx={{ flex: 1 }}
+                                        />
+                                        <TextField
+                                            type="number"
+                                            size="small"
+                                            label="ПДС (рублей)"
+                                            value={localInsuranceDeal}
+                                            onChange={(e) => setLocalInsuranceDeal(+e.currentTarget.value)}
+                                            sx={{ flex: 1 }}
+                                        />
+                                    </Box>
+                                </Box>
+                            </Box>
+
+                    )}
+
+                {!emptyCallCondition ? <Button
                     onClick={handleAddCall}
                     fullWidth
                     sx={{
@@ -281,8 +293,9 @@ export const AddingCalls = () => {
                     }}
                 >
                     + Добавить звонок
-                </Button>
-            )}
+                </Button> : ''}
+
+
         </Card>
     );
 };
