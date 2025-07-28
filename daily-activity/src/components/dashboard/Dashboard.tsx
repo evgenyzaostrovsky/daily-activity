@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import {useSelector} from "react-redux";
 import {RootState} from "../../app/store";
+import CircularWithValueLabel from "../CircularWithValueLabel";
 
 
 export const Dashboard = () => {
@@ -47,20 +48,25 @@ export const Dashboard = () => {
 
 
     return (
-        <Grid container spacing={2} sx={{ padding: "20px", justifyContent: "center", alignItems: "center", width: "100%" }}>
+        <Grid container spacing={2}
+              sx={{
+                  padding: "20px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%" }}>
 
-            <Grid size={{ xs: 12, sm: 6, md: 2.7}} >
+            <Grid size={{ xs: 12, sm: 6, md: 2.43}} >
                 <DashboardItem
                     title="Всего звонков"
-                    value={calls.length}
-                    description="новые+старые"
+                    value={<CircularWithValueLabel />}
+
                     color={callsColor}
                     iconText={<PhoneOutlinedIcon fontSize="small" color="info" />}
 
                 />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 2.7 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 2.43 }}>
                 <DashboardItem
                     title="Пайп по продуктам"
                     value={
@@ -93,7 +99,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 2.7 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 2.43 }}>
                 <DashboardItem
                     title="Реализованные сделки"
                     value={

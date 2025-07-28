@@ -213,7 +213,7 @@ export const AddingCalls = () => {
                 </Grid>
             </Grid>
 
-            <Box sx={{ width: "100%", padding: "0px 30px " }}>
+            <Box sx={{ width: "100%", padding: "0px 10px " }}>
                 <Box sx={{ mb: "20px" }}>
                     <Typography sx={{ mb: "20px" }}>Пайп по продуктам</Typography>
                     <Box sx={{ display: "flex", gap: "10px", width: "100%" }}>
