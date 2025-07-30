@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
+import BasicDatePicker from "../../BasicDatePicker";
 
 export function Header() {
     const today = new Date();
@@ -40,7 +41,8 @@ export function Header() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Учет активностей
                     </Typography>
-                    <Button color="inherit">{formattedDate}</Button>
+
+                     <BasicDatePicker/>
                 </Toolbar>
             </AppBar>
         </Box>

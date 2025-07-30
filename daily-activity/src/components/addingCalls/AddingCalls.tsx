@@ -7,10 +7,12 @@ import Button from "@mui/material/Button";
 import WifiCalling3Icon from '@mui/icons-material/WifiCalling3';
 import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 import { addCall, Call } from "../../features/calls/callsSlice";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../app/store";
 
 export const AddingCalls = () => {
     const dispatch = useDispatch();
+    const selectedDate = useSelector((state: RootState) => state.date.selectedDate);
 
     const [newCall, setNewCall] = useState<boolean>(false);
     const [oldCall, setOldCall] = useState<boolean>(false);
@@ -38,7 +40,7 @@ export const AddingCalls = () => {
         const newCallAdding: Call = {
             id: Date.now().toString(),
             type: newCall ? 'newCall' : 'oldCall',
-            timestamp: new Date().toISOString(),
+            timestamp: selectedDate,
             noteReject,
             fundOffered,
             pipe: {

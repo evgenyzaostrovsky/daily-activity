@@ -5,12 +5,19 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {useSelector} from "react-redux";
 import {RootState} from "../app/store";
+import dayjs from "dayjs";
 
 
 
 function CircularProgressWithLabel(props: any) {
-    const calls = useSelector((state: RootState) => state.calls)
+    const callsState = useSelector((state: RootState) => state.calls)
+    const selectedDate = useSelector((state: RootState) => state.date.selectedDate);
+    const calls = callsState.filter((call) =>
+        dayjs(call.timestamp).isSame(selectedDate, 'day')
+    );
+
     const totalCalls =  calls.length;
+
     let circularProgressColor: string;
 
     if (calls.length < 8) {
@@ -51,9 +58,12 @@ function CircularProgressWithLabel(props: any) {
 
 export default function CircularWithValueLabel() {
 
-    const calls = useSelector((state: RootState) => state.calls)
+    const callsState = useSelector((state: RootState) => state.calls)
+    const selectedDate = useSelector((state: RootState) => state.date.selectedDate);
+    const calls = callsState.filter((call) =>
+        dayjs(call.timestamp).isSame(selectedDate, 'day')
+    );
     const totalCalls =  calls.length;
-
 
     return <CircularProgressWithLabel value={totalCalls >= 15 ? 100 : totalCalls/15*100} />;
 }

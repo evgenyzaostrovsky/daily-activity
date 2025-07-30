@@ -8,10 +8,18 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import {useSelector} from "react-redux";
 import {RootState} from "../../app/store";
 import CircularWithValueLabel from "../CircularWithValueLabel";
+import dayjs, { Dayjs } from 'dayjs';
 
 
 export const Dashboard = () => {
-    const calls = useSelector((state: RootState) => state.calls)
+    const callsState = useSelector((state: RootState) => state.calls)
+    const selectedDate = useSelector((state: RootState) => state.date.selectedDate);
+
+    const calls = callsState.filter((call) =>
+        dayjs(call.timestamp).isSame(selectedDate, 'day')
+    );
+
+    console.log(calls)
 
     let callsColor: string;
 
@@ -53,12 +61,14 @@ export const Dashboard = () => {
                   padding: "20px",
                   justifyContent: "center",
                   alignItems: "center",
+                  alignSelf: "center",
+                  maxWidth: "1180px",
                   width: "100%" }}>
 
-            <Grid size={{ xs: 12, sm: 6, md: 2.43}} >
+            <Grid item size={{ xs: 12, sm: 6, md: 4}} >
                 <DashboardItem
                     title="Всего звонков"
-                    value={<CircularWithValueLabel />}
+                    value={<CircularWithValueLabel /> }
 
                     color={callsColor}
                     iconText={<PhoneOutlinedIcon fontSize="small" color="info" />}
@@ -66,7 +76,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 2.43 }}>
+            <Grid item size={{ xs: 12, sm: 6, md: 4 }}>
                 <DashboardItem
                     title="Пайп по продуктам"
                     value={
@@ -99,7 +109,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid size={{ xs: 12, sm: 6, md: 2.43 }}>
+            <Grid item size={{ xs: 12, sm: 6, md: 4 }}>
                 <DashboardItem
                     title="Реализованные сделки"
                     value={

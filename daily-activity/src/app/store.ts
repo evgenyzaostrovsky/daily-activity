@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import callsReducer from '../features/calls/callsSlice'
+import dateReducer from '../features/date/dateSlice'
 
 export const store = configureStore({
     reducer: {
         calls: callsReducer,
+        date: dateReducer,
     },
 })
 
