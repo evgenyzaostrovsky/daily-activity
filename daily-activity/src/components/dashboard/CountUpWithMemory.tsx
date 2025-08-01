@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 
+
 interface CountUpWithMemoryProps {
     value: number;
     duration?: number;

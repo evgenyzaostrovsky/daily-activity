@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"countup.js": "^2.9.0",
 		"framer-motion": "^12.23.9",
 		"react-countup": "^6.5.3"
 	}
