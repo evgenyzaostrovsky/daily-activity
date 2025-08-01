@@ -9,6 +9,9 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../app/store";
 import CircularWithValueLabel from "../CircularWithValueLabel";
 import dayjs, { Dayjs } from 'dayjs';
+import CountUp from "react-countup";
+import {useEffect} from "react";
+import {CountUpWithMemory} from "./CountUpWithMemory";
 
 
 export const Dashboard = () => {
@@ -51,8 +54,12 @@ export const Dashboard = () => {
         },
         { noteDeals: 0, fundDeals: 0, insuranceDeals: 0 }
     )
+    let prevTotalPipe = {...totalPipe};
+    let prevTotalDeals = {...totalDeals}
+    useEffect(() => {
 
 
+    }, [totalPipe, totalDeals]);
 
 
     return (
@@ -65,7 +72,7 @@ export const Dashboard = () => {
                   maxWidth: "1180px",
                   width: "100%" }}>
 
-            <Grid item size={{ xs: 12, sm: 6, md: 4}} >
+            <Grid  size={{ xs: 12, sm: 6, md: 4}} >
                 <DashboardItem
                     title="Всего звонков"
                     value={<CircularWithValueLabel /> }
@@ -76,7 +83,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid item size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid  size={{ xs: 12, sm: 6, md: 4 }}>
                 <DashboardItem
                     title="Пайп по продуктам"
                     value={
@@ -89,17 +96,17 @@ export const Dashboard = () => {
                             }}
                         >
                             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <Typography fontWeight="bold">{totalPipe.note}</Typography>
+                                <Typography fontWeight="bold"><CountUpWithMemory value = {totalPipe.note} /></Typography>
                                 <Typography variant="caption">ИОБ</Typography>
                             </Box>
 
                             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <Typography fontWeight="bold">{totalPipe.fund}</Typography>
+                                <Typography fontWeight="bold"><CountUpWithMemory value = {totalPipe.fund} /></Typography>
                                 <Typography variant="caption">ПИФ</Typography>
                             </Box>
 
                             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <Typography fontWeight="bold">{totalPipe.insurance}</Typography>
+                                <Typography fontWeight="bold"><CountUpWithMemory value = {totalPipe.insurance} /></Typography>
                                 <Typography variant="caption">ПДС</Typography>
                             </Box>
                         </Box>
@@ -109,7 +116,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid item size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid  size={{ xs: 12, sm: 6, md: 4 }}>
                 <DashboardItem
                     title="Реализованные сделки"
                     value={
@@ -122,17 +129,17 @@ export const Dashboard = () => {
                             }}
                         >
                             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <Typography fontWeight="bold">{totalDeals.noteDeals}</Typography>
+                                <Typography fontWeight="bold"><CountUpWithMemory value = {totalDeals.noteDeals} /></Typography>
                                 <Typography variant="caption">ИОБ</Typography>
                             </Box>
 
                             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <Typography fontWeight="bold">{totalDeals.fundDeals}</Typography>
+                                <Typography fontWeight="bold"><CountUpWithMemory value = {totalDeals.fundDeals} /></Typography>
                                 <Typography variant="caption">ПИФ</Typography>
                             </Box>
 
                             <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                <Typography fontWeight="bold">{totalDeals.insuranceDeals}</Typography>
+                                <Typography fontWeight="bold"><CountUpWithMemory value = {totalDeals.insuranceDeals} /></Typography>
                                 <Typography variant="caption">ПДС</Typography>
                             </Box>
                         </Box>
