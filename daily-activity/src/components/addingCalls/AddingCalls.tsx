@@ -9,6 +9,7 @@ import PhoneCallbackIcon from '@mui/icons-material/PhoneCallback';
 import { addCall, Call } from "../../features/calls/callsSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../app/store";
+import dayjs, { Dayjs } from 'dayjs';
 
 export const AddingCalls = () => {
     const dispatch = useDispatch();
@@ -36,11 +37,17 @@ export const AddingCalls = () => {
             return;
         }
 
+        const now = dayjs();
+
+        const timestamp = selectedDate
+            .hour(now.hour())
+            .minute(now.minute())
+            .second(now.second());
 
         const newCallAdding: Call = {
             id: Date.now().toString(),
             type: newCall ? 'newCall' : 'oldCall',
-            timestamp: selectedDate,
+            timestamp,
             noteReject,
             fundOffered,
             pipe: {
@@ -125,7 +132,7 @@ export const AddingCalls = () => {
         : { color: "#0a0817" };
 
     const buttonFundOfferedStyles = fundOffered
-        ? { border: '1px solid #e2e8f0', backgroundColor: "#90dbf4", color: 'black' }
+        ? { border: '1px solid #e2e8f0', backgroundColor: "#ffc766", color: 'black' }
         : { color: "#0a0817" };
 
     const onChangeHandler = (state: "NEW_CALL" | "OLD_CALL" | "NOTE_REJECT" | "FUND_OFFERED" | "ITS_DEAL") => {

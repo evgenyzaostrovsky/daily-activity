@@ -18,6 +18,7 @@ export default function BasicDatePicker() {
 
                 <DatePicker
                     value={selectedDate}
+
                     format="DD.MM.YYYY"
                     onChange={(date) => {
                         if (date) {
@@ -29,11 +30,14 @@ export default function BasicDatePicker() {
                             variant: 'outlined',
                             size: 'small',
                             sx: {
-                                width: '100px',
-                                '& input': {
-                                    textAlign: 'left',
+                                minWidth: 'unset !important',
+                                '& .MuiPickersInputBase-sectionContent': {
+                                    textAlign: 'center',
                                     fontSize: '14px',
-                                    border: 'none',
+                                },
+                                '& .MuiPickersInputBase-root': {
+                                    width: '140px',
+                                    border: 'none'
                                 },
                             },
                         },

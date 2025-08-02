@@ -1,6 +1,7 @@
 import {NAV_ITEMS} from "./navigationbar/NavigationBar";
 import {DayResults} from "./dayResults/DayResults";
 import {AddingCalls} from "./addingCalls/AddingCalls";
+import {CallsHistory} from "./CallsHistory/CallsHistory";
 
 
 
@@ -23,7 +24,7 @@ export const MainRender = ({ activeTab }: MainPropsType ) => {
         case NAV_ITEMS.RESULT:
             return <DayResults />;
         case NAV_ITEMS.HISTORY:
-            return <></>;
+            return <CallsHistory/>;
         case NAV_ITEMS.INCENTIVE:
             return <></>;
         default:

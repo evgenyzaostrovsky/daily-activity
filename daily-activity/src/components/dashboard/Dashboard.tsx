@@ -22,7 +22,6 @@ export const Dashboard = () => {
         dayjs(call.timestamp).isSame(selectedDate, 'day')
     );
 
-    console.log(calls)
 
     let callsColor: string;
 
@@ -54,12 +53,6 @@ export const Dashboard = () => {
         },
         { noteDeals: 0, fundDeals: 0, insuranceDeals: 0 }
     )
-    let prevTotalPipe = {...totalPipe};
-    let prevTotalDeals = {...totalDeals}
-    useEffect(() => {
-
-
-    }, [totalPipe, totalDeals]);
 
 
     return (
@@ -72,7 +65,7 @@ export const Dashboard = () => {
                   maxWidth: "1180px",
                   width: "100%" }}>
 
-            <Grid  size={{ xs: 12, sm: 6, md: 4}} >
+            <Grid  size={{ xs: 12, sm: 12, md: 4}} >
                 <DashboardItem
                     title="Всего звонков"
                     value={<CircularWithValueLabel /> }
@@ -83,7 +76,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid  size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid  size={{ xs: 12, sm: 12, md: 4 }}>
                 <DashboardItem
                     title="Пайп по продуктам"
                     value={
@@ -116,7 +109,7 @@ export const Dashboard = () => {
                 />
             </Grid>
 
-            <Grid  size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid  size={{ xs: 12, sm: 12, md: 4 }}>
                 <DashboardItem
                     title="Реализованные сделки"
                     value={

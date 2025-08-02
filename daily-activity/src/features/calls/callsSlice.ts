@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import dayjs, { Dayjs } from 'dayjs';
 
 export type Call = {
     id: string
     type: 'newCall' | 'oldCall'
-    timestamp: string
+    timestamp: Dayjs
     noteReject: boolean,
     fundOffered: boolean,
     pipe: {
@@ -25,7 +26,9 @@ const callsSlice = createSlice({
     initialState: initialCallsState,
     reducers: {
         addCall: (state, action) => {
-            state.push(action.payload)
+            state.unshift(action.payload)
+            console.log(action.payload)
+
         },
         removeCall: () => {},
         editCall: () => {}
