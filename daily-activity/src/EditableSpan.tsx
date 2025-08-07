@@ -1,5 +1,7 @@
 import {ChangeEvent, useState} from "react";
 import TextField from "@mui/material/TextField";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import Box from "@mui/material/Box";
 
 type EditableSpanPropsType = {
     value: number;
@@ -30,17 +32,36 @@ export const EditableSpan = ({ value, onChange, classes }: EditableSpanPropsType
 
     return editMode ? (
         <TextField
-            sx={{ width: "120px" }}
+            sx={{ width: "100px", margin: '0' }}
             variant="standard"
             size="small"
             value={localValue}
             onChange={handleChange}
             autoFocus
             onBlur={offEditMode}
+            slotProps={{
+                input: {
+                    disableUnderline: true
+                }
+            }}
+
         />
     ) : (
+        <Box sx={{
+            display: "inline-flex"
+        }}>
         <span className={classes} onDoubleClick={onEditMode}>
             {value}
         </span>
+            <BorderColorIcon
+                fontSize={'small'}
+                sx={
+                    {
+                        padding: "5px 0px 0px 0px",
+                        cursor: "pointer"
+                    }}
+                onClick={onEditMode}/>
+        </Box>
+
     );
 };

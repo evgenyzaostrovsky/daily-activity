@@ -31,7 +31,16 @@ const callsSlice = createSlice({
 
         },
         removeCall: () => {},
-        editCall: () => {}
+        editCall: (state, action) => {
+            const { id, updatedData } = action.payload;
+            const index = state.findIndex(call => call.id === id);
+            if (index !== -1) {
+                state[index] = {
+                    ...state[index],
+                    ...updatedData,
+                };
+            }
+        },
     },
 })
 

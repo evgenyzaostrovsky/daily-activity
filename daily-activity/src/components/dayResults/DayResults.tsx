@@ -33,9 +33,9 @@ export const DayResults = () => {
         const lines = [];
 
         lines.push(`${formattedToday}`, "");
-        lines.push(`Всего звонков: ${calls.length}`);
-        lines.push(`Новые звонки: ${calls.filter(c => c.type === "newCall").length}`);
-        lines.push(`Старые звонки: ${calls.filter(c => c.type === "oldCall").length}`, "");
+        lines.push(`Звонки: ${calls.length}`);
+        lines.push(`Новые: ${calls.filter(c => c.type === "newCall").length}`);
+        lines.push(`Старые: ${calls.filter(c => c.type === "oldCall").length}`, "");
 
         lines.push("ВС СП:");
         lines.push(`Кол-во: ${calls.filter(c => c.pipe.note !== 0).length}`);
@@ -43,7 +43,6 @@ export const DayResults = () => {
 
         lines.push(`Отказ от ИОБ: ${calls.filter(c => c.noteReject).length}`);
         lines.push(`Предложен ПИФ: ${calls.filter(c => c.fundOffered).length}`, "");
-
         lines.push("ВС ПИФ:");
         lines.push(`Кол-во: ${calls.filter(c => c.pipe.fund !== 0).length}`);
         lines.push(`Сумма: ${calls.reduce((acc, c) => acc + c.pipe.fund, 0)}`, "");
@@ -56,10 +55,10 @@ export const DayResults = () => {
         lines.push(`РС ПИФ: ${calls.reduce((acc, c) => acc + c.deals.fund, 0)}`);
         lines.push(`РС ПДС: ${calls.reduce((acc, c) => acc + c.deals.insurance, 0)}`, "");
 
-        lines.push(`${formattedTomorrow}`, "");
-        lines.push(`ВС ИОБ: ${iobValue}`);
-        lines.push(`ВС ПИФ: ${fundValue}`);
-        lines.push(`ВС ПДС: ${insuranceValue}`);
+        lines.push(`ВС на ${formattedTomorrow}`, "");
+        lines.push(`ИОБ: ${iobValue}`);
+        lines.push(`ПИФ: ${fundValue}`);
+        lines.push(`ПДС: ${insuranceValue}`);
 
         const textToCopy = lines.join("\n");
 

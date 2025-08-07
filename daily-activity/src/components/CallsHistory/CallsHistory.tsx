@@ -99,6 +99,7 @@ export const CallsHistory = () => {
                     }}>Данных нет</Box> :
                     filteredCalls.map((call) => {
                     return <CallsHistoryItem
+                        id={call.id}
                         key={call.id}
                         type={call.type}
                         date={call.timestamp}
