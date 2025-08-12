@@ -22,7 +22,13 @@ export const CallsHistory = () => {
 
     type FilterType = 'oldCall' | 'newCall'
 
-    const [filteredCalls, setFilteredCalls] =  useState(calls)
+    const [filteredCalls, setFilteredCalls] = useState<Call[]>(calls);
+
+// при изменении calls обновляем filteredCalls
+    React.useEffect(() => {
+        setFilteredCalls(calls);
+    }, [calls]);
+
 
     const changeNewOldFilter = (value: FilterType) => {
         const filteredCalls = calls.filter((call) => call.type === value ? call : null)

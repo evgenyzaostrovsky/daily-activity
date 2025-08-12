@@ -3,7 +3,7 @@ import {Card, Grid, Typography, Button, Box, Modal} from "@mui/material";
 import dayjs, {Dayjs} from "dayjs";
 import {EditableSpan} from "../../EditableSpan";
 import {useDispatch} from "react-redux";
-import {editCall} from '../../features/calls/callsSlice'
+import {editCall, removeCall} from '../../features/calls/callsSlice'
 
 
 type pipeLineType = {
@@ -87,6 +87,7 @@ export const CallsHistoryItem = ({
                 <Card
                     sx={{
                         display: "flex",
+                        position: "relative",
                         flexDirection: "row",
                         justifyContent: "space-between",
                         padding: "20px",
@@ -138,7 +139,25 @@ export const CallsHistoryItem = ({
                         <Typography variant={"subtitle2"}>
                             Сделки: {localDeals.fund + localDeals.note + localDeals.insurance}
                         </Typography>
+
                     </Box>
+                    <Button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            dispatch(removeCall(id));
+                        }}
+                            sx={
+                                {
+                                    position: "absolute",
+                                    padding: "0",
+                                    minWidth: "24px",
+                                    minHeight: "24px",
+                                    top: "5px",
+                                    right: "5px"
+                                }
+                            }>
+                        x
+                    </Button>
                 </Card>
             </Grid>
 
@@ -159,7 +178,7 @@ export const CallsHistoryItem = ({
                             <strong>Тип звонка:</strong> {type === "oldCall" ? "Старый" : "Новый"}
                         </Box>
 
-                        {(pipeline.note + pipeline.fund + pipeline.insurance) !== 0 && (
+
                             <Box mb={1}>
                                 <strong>Пайп:</strong>
                                 <ul style={{margin: '4px 0 0 16px', padding: 0}}>
@@ -180,9 +199,9 @@ export const CallsHistoryItem = ({
                                                            }))}/></li>
                                 </ul>
                             </Box>
-                        )}
 
-                        {(deals.note + deals.fund + deals.insurance) !== 0 && (
+
+
                             <Box mb={1}>
                                 <strong>Сделки:</strong>
                                 <ul style={{margin: '4px 0 0 16px', padding: 0}}>
@@ -203,7 +222,7 @@ export const CallsHistoryItem = ({
                                                            }))}/></li>
                                 </ul>
                             </Box>
-                        )}
+
 
                         <Box mb={1}>
                             <strong>Отказ ИОБ:</strong> {rejectNote ? "Да" : "Нет"} <br/>
@@ -216,7 +235,13 @@ export const CallsHistoryItem = ({
                             onClick={handleClose}>
                         Закрыть
                     </Button>
+                    <Button variant="outlined"
+                            sx={{backgroundColor: "#ef4444", color: "#ffffff", padding: "10px", ml: "5px"}}
+                            onClick={() =>dispatch(removeCall(id))}>
+                        Удалить
+                    </Button>
                 </Box>
+
             </Modal>
         </>
     );

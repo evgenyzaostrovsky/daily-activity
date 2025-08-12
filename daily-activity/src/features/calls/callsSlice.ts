@@ -30,7 +30,10 @@ const callsSlice = createSlice({
             console.log(action.payload)
 
         },
-        removeCall: () => {},
+        removeCall: (state, action) => {
+            const id = action.payload;
+            return state.filter(call => call.id !== id);
+        },
         editCall: (state, action) => {
             const { id, updatedData } = action.payload;
             const index = state.findIndex(call => call.id === id);
