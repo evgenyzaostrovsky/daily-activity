@@ -4,6 +4,7 @@ import {AddingCalls} from "./addingCalls/AddingCalls";
 import {CallsHistory} from "./CallsHistory/CallsHistory";
 import {DealsPage} from "./dealsPage/DealsPage";
 import {PipePage} from "./pipePage/PipePage";
+import {IncentiveCalculator} from "./incentiveCalculator/IncentiveCalculator";
 
 
 
@@ -28,7 +29,7 @@ export const MainRender = ({ activeTab }: MainPropsType ) => {
         case NAV_ITEMS.HISTORY:
             return <CallsHistory/>;
         case NAV_ITEMS.INCENTIVE:
-            return <></>;
+            return <IncentiveCalculator/>;
         default:
             return null;
     }
