@@ -2,6 +2,8 @@ import {NAV_ITEMS} from "./navigationbar/NavigationBar";
 import {DayResults} from "./dayResults/DayResults";
 import {AddingCalls} from "./addingCalls/AddingCalls";
 import {CallsHistory} from "./CallsHistory/CallsHistory";
+import {DealsPage} from "./dealsPage/DealsPage";
+import {PipePage} from "./pipePage/PipePage";
 
 
 
@@ -18,9 +20,9 @@ export const MainRender = ({ activeTab }: MainPropsType ) => {
         case NAV_ITEMS.CALL:
             return <AddingCalls />;
         case NAV_ITEMS.DEALS:
-            return <></>;
+            return <DealsPage/>;
         case NAV_ITEMS.PIPE:
-            return <></>;
+            return <PipePage/>;
         case NAV_ITEMS.RESULT:
             return <DayResults />;
         case NAV_ITEMS.HISTORY:
